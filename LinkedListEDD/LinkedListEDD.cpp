@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 using namespace std;
 
 //Declaracion de la estructura Nodo
@@ -19,7 +20,7 @@ void Insertar(Nodo*& lista, int n) {
 	Nodo* aux1 = lista;
 	Nodo* aux2 = NULL;
 
-	while ((aux1 != NULL) && (aux1->dato > n)) {
+	while ((aux1 != NULL) && (aux1->dato < n)) {
 		aux2 = aux1;
 		aux1 = aux1->siguiente;
 	}
@@ -36,7 +37,7 @@ void Insertar(Nodo*& lista, int n) {
 
 
 //Buscar elemento en la lista
-void Buscar(Nodo * lista, int n) {
+void Buscar(Nodo* lista, int n) {
 	bool bandera = false;
 
 	Nodo* actual = new Nodo();
@@ -57,12 +58,13 @@ void Buscar(Nodo * lista, int n) {
 	}
 }
 
+//Eliminar dato de la lista enlazada
 void EliminarDato(Nodo*& lista, int n) {
 	if (lista != NULL) {
 		Nodo* aux{};
 		Nodo* anterior = NULL;
 
-		while((aux != NULL) && (aux->dato != n)) {
+		while ((aux != NULL) && (aux->dato != n)) {
 			anterior = aux;
 			aux = aux->siguiente;
 		}
@@ -81,13 +83,34 @@ void EliminarDato(Nodo*& lista, int n) {
 			delete aux;
 		}
 	}
+	else {
+		cout << "Lista vacia, primero inserte datos en la lista." << endl;
+
+	}
+}
+
+//Mostrar todos los datos de la lista enlazada
+void MostrarDatos(Nodo* lista) {
+	if (lista != NULL) {
+		Nodo* actual = new Nodo();
+		actual = lista;
+
+		while (actual != NULL) {
+			cout << "|" << actual->dato << "|" << "->";
+			actual = actual->siguiente;
+		}
+	}
+	else {
+		cout << "Lista vacia, primero inserte datos en la lista." << endl;
+	}
+
 }
 
 //Funcion para validar entrada de un numero
 string ValidarNumero(string str)
 {
 	bool notNum = false;
-	int i = 0; 
+	int i = 0;
 	while ((str[i] != '\0') && notNum != true) //'\0' es el character que marca el final del string
 	{
 		if (isdigit(str[i]) == false)
@@ -103,5 +126,77 @@ string ValidarNumero(string str)
 
 int main()
 {
-	
+	string strOpcion;
+	Nodo* lista = NULL;
+	int opcion;
+	string dato;
+
+	do {
+		opcion = 0;
+
+		cout << "Seleccione la accion a realizar:\n(1)Insertar\n(2)Buscar\n(3)Eliminar\n(4)Mostrar lista enlazada\n(5)Salir\n\n>>";
+		cin >> strOpcion;
+
+		if (ValidarNumero(strOpcion) != strOpcion) {
+			cout << "Tipo de dato incorrecto, solo se permiten numeros del 1 al 5, intente de nuevo" << endl;
+			system("PAUSE");
+			system("CLS");
+
+			continue;
+		}
+		else {
+			opcion = stoi(strOpcion);
+		}
+
+		switch (opcion)
+		{
+		case 1://Insertar
+			cout << "Digite el numero que desea insertar :";
+			cin >> dato;
+
+			if (ValidarNumero(dato) == dato) {
+				Insertar(lista, stoi(dato));
+				cout << "Dato " << dato << " insertado con exito." << endl;
+			}
+			else {
+				cout << "Tipo de dato invalido, solo se permiten numeros, intente de nuevo." << endl;
+			}
+			break;
+
+		case 2://Buscar
+			cout << "Digite el numero que desea buscar en la lista enlazada: ";
+			cin >> dato;
+			if (ValidarNumero(dato) == dato) {
+				Buscar(lista, stoi(dato));
+			}
+			else {
+				cout << "Tipo de dato invalido, solo se permiten numeros, intente de nuevo." << endl;
+			}
+			break;
+
+		case 3://Eliminar
+			cout << "Digite el numero que desea eliminar de la lista enlazada: ";
+			cin >> dato;
+
+			if (ValidarNumero(dato) == dato) {
+				EliminarDato(lista, stoi(dato));
+				cout << "Elemento " << dato << " eliminado exitosamente." << endl;
+			}
+			else {
+				cout << "Tipo de dato invalido, solo se permiten numeros, intente de nuevo." << endl;
+			}
+
+			break;
+
+		case 4://Mostrar
+			MostrarDatos(lista);
+			break;
+		default:
+			cout << "Opcion fuera del listado, intente de nuevo" << endl;
+
+			break;
+		}
+		system("PAUSE");
+		system("CLS");
+	} while (opcion != 5);
 }
