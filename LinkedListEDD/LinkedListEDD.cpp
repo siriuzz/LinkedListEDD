@@ -61,8 +61,9 @@ void Buscar(Nodo* lista, int n) {
 //Eliminar dato de la lista enlazada
 void EliminarDato(Nodo*& lista, int n) {
 	if (lista != NULL) {
-		Nodo* aux{};
+		Nodo* aux;
 		Nodo* anterior = NULL;
+		aux = lista;
 
 		while ((aux != NULL) && (aux->dato != n)) {
 			anterior = aux;
@@ -70,8 +71,7 @@ void EliminarDato(Nodo*& lista, int n) {
 		}
 
 		if (aux == NULL) {
-			cout << "Elemento no encontrado, intente de nuevo";
-			system("PAUSE");
+			cout << "Elemento no encontrado, intente de nuevo" << endl;
 			return;
 		}
 		else if (anterior == NULL) {
@@ -82,6 +82,8 @@ void EliminarDato(Nodo*& lista, int n) {
 			anterior->siguiente = aux->siguiente;
 			delete aux;
 		}
+		cout << "Elemento " << n << " eliminado exitosamente." << endl;
+
 	}
 	else {
 		cout << "Lista vacia, primero inserte datos en la lista." << endl;
@@ -97,13 +99,13 @@ void MostrarDatos(Nodo* lista) {
 
 		while (actual != NULL) {
 			cout << "|" << actual->dato << "|" << "->";
+			if (actual->siguiente == NULL) cout << " NULL" << endl;
 			actual = actual->siguiente;
 		}
 	}
 	else {
 		cout << "Lista vacia, primero inserte datos en la lista." << endl;
 	}
-
 }
 
 //Funcion para validar entrada de un numero
@@ -134,7 +136,7 @@ int main()
 	do {
 		opcion = 0;
 
-		cout << "Seleccione la accion a realizar:\n(1)Insertar\n(2)Buscar\n(3)Eliminar\n(4)Mostrar lista enlazada\n(5)Salir\n\n>>";
+		cout << "Seleccione la accion a realizar:\n(1)Insertar\n(2)Buscar\n(3)Eliminar\n(4)Mostrar lista enlazada\n(5)Salir\n>>";
 		cin >> strOpcion;
 
 		if (ValidarNumero(strOpcion) != strOpcion) {
@@ -151,7 +153,7 @@ int main()
 		switch (opcion)
 		{
 		case 1://Insertar
-			cout << "Digite el numero que desea insertar :";
+			cout << "Digite el numero que desea insertar: ";
 			cin >> dato;
 
 			if (ValidarNumero(dato) == dato) {
@@ -175,21 +177,30 @@ int main()
 			break;
 
 		case 3://Eliminar
-			cout << "Digite el numero que desea eliminar de la lista enlazada: ";
-			cin >> dato;
+			if (lista != NULL) {
+				cout << "Digite el numero que desea eliminar de la lista enlazada: ";
+				cin >> dato;
 
-			if (ValidarNumero(dato) == dato) {
-				EliminarDato(lista, stoi(dato));
-				cout << "Elemento " << dato << " eliminado exitosamente." << endl;
+				if (ValidarNumero(dato) == dato) {
+					EliminarDato(lista, stoi(dato));
+				}
+				else {
+					cout << "Tipo de dato invalido, solo se permiten numeros, intente de nuevo." << endl;
+				}
 			}
 			else {
-				cout << "Tipo de dato invalido, solo se permiten numeros, intente de nuevo." << endl;
+				cout << "Lista vacia, primero inserte datos en la lista." << endl;
 			}
 
 			break;
 
 		case 4://Mostrar
 			MostrarDatos(lista);
+			break;
+
+		case 5://Salir
+			cout << "ADIOS!!" << endl;
+
 			break;
 		default:
 			cout << "Opcion fuera del listado, intente de nuevo" << endl;
