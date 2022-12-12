@@ -12,23 +12,27 @@ struct Nodo {
 	Nodo* siguiente;
 };
 
+bool checkIfEmpty(Nodo*& lista) { //retorna true si la lista esta vacia
+	return (lista == NULL);
+}
+
 //Funcion Insertar entero a la lista
 void Insertar(Nodo*& lista, int n) {
-	Nodo* nuevo_nodo = new Nodo();
-	nuevo_nodo->dato = n;
+	Nodo* nuevo_nodo = new Nodo(); //reservar espacio en memoria
+	nuevo_nodo->dato = n; //asignar n al parametro dato del nuevo nodo
 
-	Nodo* aux1 = lista;
+	Nodo* aux1 = lista; //los nodos auxiliares sirven para insertar el elemento en el lugar correspondiente
 	Nodo* aux2 = NULL;
 
-	while ((aux1 != NULL) && (aux1->dato < n)) {
+	while ((aux1 != NULL) && (aux1->dato < n)) { //coloca los nodos auxiliares en su posicion para insertar el dato
 		aux2 = aux1;
 		aux1 = aux1->siguiente;
 	}
 
-	if (lista == aux1) {
+	if (lista == aux1) { //caso en el que la lista esta vacia o el ultimo dato es mayor que el insertado
 		lista = nuevo_nodo;
 	}
-	else {
+	else { //caso para insertar el dato en entre dos datos
 		aux2->siguiente = nuevo_nodo;
 	}
 
@@ -38,13 +42,18 @@ void Insertar(Nodo*& lista, int n) {
 
 //Buscar elemento en la lista
 void Buscar(Nodo* lista, int n) {
-	bool bandera = false;
+	if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
+		cout << "Lista vacia, primero inserte datos en la lista." << endl;
+		return;
+	}
 
-	Nodo* actual = new Nodo();
-	actual = lista;
+	bool bandera = false; //variable que dice si existe o no el dato en la lista
 
-	while ((actual != NULL) && (actual->dato <= n)) {
-		if (actual->dato == n) {
+	Nodo* actual = new Nodo(); //reservar espacio en memoria
+	actual = lista; //se empieza desde el principio de la lista
+
+	while ((actual != NULL) && (actual->dato <= n)) { //se busca el elemento en la lista
+		if (actual->dato == n) { //si se encuentra
 			bandera = true;
 		}
 		actual = actual->siguiente;
@@ -60,52 +69,51 @@ void Buscar(Nodo* lista, int n) {
 
 //Eliminar dato de la lista enlazada
 void EliminarDato(Nodo*& lista, int n) {
-	if (lista != NULL) {
-		Nodo* aux;
-		Nodo* anterior = NULL;
-		aux = lista;
-
-		while ((aux != NULL) && (aux->dato != n)) {
-			anterior = aux;
-			aux = aux->siguiente;
-		}
-
-		if (aux == NULL) {
-			cout << "Elemento no encontrado, intente de nuevo" << endl;
-			return;
-		}
-		else if (anterior == NULL) {
-			lista = lista->siguiente;
-			delete aux;
-		}
-		else {
-			anterior->siguiente = aux->siguiente;
-			delete aux;
-		}
-		cout << "Elemento " << n << " eliminado exitosamente." << endl;
-
-	}
-	else {
+	if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
 		cout << "Lista vacia, primero inserte datos en la lista." << endl;
-
+		return;
 	}
+
+	Nodo* aux; //declaracion nodo auxiliar
+	Nodo* anterior = NULL; //anterior al auxiliar
+	aux = lista; //aux empieza por el principio de la lista
+
+	while ((aux != NULL) && (aux->dato != n)) {
+		anterior = aux;
+		aux = aux->siguiente;
+	}
+
+	if (aux == NULL) { //no se encuentra el dato en la lista
+		cout << "Elemento no encontrado, intente de nuevo" << endl;
+		return;
+	}
+	else if (anterior == NULL) { //el elemento se encuentra al principio de la lista
+		lista = lista->siguiente;
+		delete aux;
+	}
+	else { //se encuentra entre dos elementos
+		anterior->siguiente = aux->siguiente;
+		delete aux;
+	}
+	cout << "Elemento " << n << " eliminado exitosamente." << endl;
 }
 
 //Mostrar todos los datos de la lista enlazada
 void MostrarDatos(Nodo* lista) {
-	if (lista != NULL) {
-		Nodo* actual = new Nodo();
-		actual = lista;
+	if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
+		cout << "NULL (La lista esta vacia)" << endl;
+		return;
+	}
 
-		while (actual != NULL) {
-			cout << "|" << actual->dato << "|" << "->";
-			if (actual->siguiente == NULL) cout << " NULL" << endl;
-			actual = actual->siguiente;
-		}
+	Nodo* actual = new Nodo(); //reservar espacio en memoria
+	actual = lista; //se empieza por el principio de la lista
+
+	while (actual != NULL) { //imprimir cada dato de los nodos de la lista
+		cout << "|" << actual->dato << "|" << "->";
+		if (actual->siguiente == NULL) cout << " NULL" << endl;
+		actual = actual->siguiente;
 	}
-	else {
-		cout << "Lista vacia, primero inserte datos en la lista." << endl;
-	}
+
 }
 
 //Funcion para validar entrada de un numero
@@ -129,28 +137,27 @@ string ValidarNumero(string str)
 int main()
 {
 	string strOpcion;
-	Nodo* lista = NULL;
 	int opcion;
-	string dato;
+	Nodo* lista = NULL;
+	string dato; //dato a insertar
 
 	do {
-		opcion = 0;
+		opcion = 0; //seleccion nula
 
+		//menu y pedir opcion
 		cout << "Seleccione la accion a realizar:\n(1)Insertar\n(2)Buscar\n(3)Eliminar\n(4)Mostrar lista enlazada\n(5)Salir\n>>";
 		cin >> strOpcion;
 
-		if (ValidarNumero(strOpcion) != strOpcion) {
+		if (ValidarNumero(strOpcion) != strOpcion) { //si se inserta un tipo de dato diferente de un entero
 			cout << "Tipo de dato incorrecto, solo se permiten numeros del 1 al 5, intente de nuevo" << endl;
 			system("PAUSE");
 			system("CLS");
 
 			continue;
 		}
-		else {
-			opcion = stoi(strOpcion);
-		}
+		opcion = stoi(strOpcion);
 
-		switch (opcion)
+		switch (opcion) //casos del menu
 		{
 		case 1://Insertar
 			cout << "Digite el numero que desea insertar: ";
@@ -200,7 +207,7 @@ int main()
 
 		case 5://Salir
 			cout << "ADIOS!!" << endl;
-
+			exit(0);
 			break;
 		default:
 			cout << "Opcion fuera del listado, intente de nuevo" << endl;
