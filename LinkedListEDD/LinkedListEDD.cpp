@@ -1,5 +1,5 @@
 /*
-Enunciado: Escriba un programa C++ que encuentre los primeros n términos de la Serie de Fibonacci.
+Enunciado: Escriba un programa en C++ que simula una Lista Enlazada.
 
 Participantes:
 1- John Luis Del Rosario Sánchez - ID 1106940
