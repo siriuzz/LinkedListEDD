@@ -1,13 +1,15 @@
-// Enunciado: Realizar un programa en C++ que simule una Lista Enlazada.
-// 
-// Participantes:
-// 1- John Luis Del Rosario Sánchez - ID 1106940
-// 2- Ashly Marisell Paula Ynoa - ID 1108023
-// 3- Elián Matos Díaz - ID 1106901
-// 4- Juan Daniel Ubiera Méndez - ID 1107248
-// 5- Kelvin Arístides García Espinal - ID 1107646
-//
-// Fecha de entrega: 12/12/2022
+/*
+Enunciado: Escriba un programa C++ que encuentre los primeros n términos de la Serie de Fibonacci.
+
+Participantes:
+1- John Luis Del Rosario Sánchez - ID 1106940
+2- Ashly Marisell Paula Ynoa - ID 1108023
+3- Elián Matos Díaz - ID 1106901
+4- Juan Daniel Ubiera Méndez - ID 1107248
+5- Kelvin Arístides García Espinal - ID 1107646
+
+Fecha de entrega: 12/12/2022
+*/
 
 #include <iostream>
 #include <string>
@@ -197,19 +199,14 @@ int main()
 			break;
 
 		case 3://Eliminar
-			if (lista != NULL) {
-				cout << "Digite el numero que desea eliminar de la lista enlazada: ";
-				cin >> dato;
+			cout << "Digite el numero que desea eliminar de la lista enlazada: ";
+			cin >> dato;
 
-				if (ValidarNumero(dato) == dato) {
-					EliminarDato(lista, stoi(dato));
-				}
-				else {
-					cout << "Tipo de dato invalido, solo se permiten numeros, intente de nuevo." << endl;
-				}
+			if (ValidarNumero(dato) == dato) {
+				EliminarDato(lista, stoi(dato));
 			}
 			else {
-				cout << "Lista vacia, primero inserte datos en la lista." << endl;
+				cout << "Tipo de dato invalido, solo se permiten numeros, intente de nuevo." << endl;
 			}
 
 			break;
