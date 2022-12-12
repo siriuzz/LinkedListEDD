@@ -221,10 +221,9 @@ int main()
 			break;
 		default:
 			cout << "Opcion fuera del listado, intente de nuevo" << endl;
-
 			break;
 		}
 		system("PAUSE");
 		system("CLS");
-	} while (opcion != 5);
+	} while (true);
 }
