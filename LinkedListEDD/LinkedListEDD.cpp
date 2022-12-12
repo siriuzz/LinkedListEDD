@@ -1,16 +1,27 @@
-// LinkedListEDD.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// Enunciado: Realizar un programa en C++ que simule una Lista Enlazada.
+// 
+// Participantes:
+// 1- John Luis Del Rosario Sánchez - ID 1106940
+// 2- Ashly Marisell Paula Ynoa - ID 1108023
+// 3- Elián Matos Díaz - ID 1106901
+// 4- Juan Daniel Ubiera Méndez - ID 1107248
+// 5- Kelvin Arístides García Espinal - ID 1107646
 //
+// Fecha de entrega: 12/12/2022
 
 #include <iostream>
 #include <string>
 #include <cstdlib>
 using namespace std;
 
-//Declaracion de la estructura Nodo
+//declaracion estructura nodo
 struct Nodo {
 	int dato;
 	Nodo* siguiente;
 };
+
+#pragma region metodos y funciones
+//Declaracion de la estructura Nodo
 
 bool checkIfEmpty(Nodo*& lista) { //retorna true si la lista esta vacia
 	return (lista == NULL);
@@ -133,6 +144,8 @@ string ValidarNumero(string str)
 	}
 	return str; //devuelve un str igual si no se encontraron letras
 }
+
+#pragma endregion
 
 int main()
 {
