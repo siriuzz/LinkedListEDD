@@ -55,11 +55,6 @@ void Insertar(Nodo*& lista, int n) {
 
 //Buscar elemento en la lista
 void Buscar(Nodo* lista, int n) {
-	if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
-		cout << "Lista vacia, primero inserte datos en la lista." << endl;
-		return;
-	}
-
 	bool bandera = false; //variable que dice si existe o no el dato en la lista
 
 	Nodo* actual = new Nodo(); //reservar espacio en memoria
@@ -82,10 +77,6 @@ void Buscar(Nodo* lista, int n) {
 
 //Eliminar dato de la lista enlazada
 void EliminarDato(Nodo*& lista, int n) {
-	if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
-		cout << "Lista vacia, primero inserte datos en la lista." << endl;
-		return;
-	}
 
 	Nodo* aux; //declaracion nodo auxiliar
 	Nodo* anterior = NULL; //anterior al auxiliar
@@ -113,10 +104,6 @@ void EliminarDato(Nodo*& lista, int n) {
 
 //Mostrar todos los datos de la lista enlazada
 void MostrarDatos(Nodo* lista) {
-	if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
-		cout << "NULL (La lista esta vacia)" << endl;
-		return;
-	}
 
 	Nodo* actual = new Nodo(); //reservar espacio en memoria
 	actual = lista; //se empieza por el principio de la lista
@@ -160,7 +147,7 @@ int main()
 		opcion = 0; //seleccion nula
 
 		//menu y pedir opcion
-		cout << "Seleccione la accion a realizar:\n(1)Insertar\n(2)Buscar\n(3)Eliminar\n(4)Mostrar lista enlazada\n(5)Salir\n>>";
+		cout << "Seleccione la accion a realizar:\n(1) Insertar\n(2) Buscar\n(3) Eliminar\n(4) Mostrar lista enlazada\n(5) Salir\n>>";
 		cin >> strOpcion;
 
 		if (ValidarNumero(strOpcion) != strOpcion) { //si se inserta un tipo de dato diferente de un entero
@@ -188,6 +175,11 @@ int main()
 			break;
 
 		case 2://Buscar
+			if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
+				cout << "Lista vacia, primero inserte datos en la lista." << endl;
+				break;
+			}
+
 			cout << "Digite el numero que desea buscar en la lista enlazada: ";
 			cin >> dato;
 			if (ValidarNumero(dato) == dato) {
@@ -199,6 +191,11 @@ int main()
 			break;
 
 		case 3://Eliminar
+			if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
+				cout << "Lista vacia, primero inserte datos en la lista." << endl;
+				break;
+			}
+
 			cout << "Digite el numero que desea eliminar de la lista enlazada: ";
 			cin >> dato;
 
@@ -212,6 +209,11 @@ int main()
 			break;
 
 		case 4://Mostrar
+			if (checkIfEmpty(lista)) { //revisar si la lista esta vacia
+				cout << "Lista vacia, primero inserte datos en la lista." << endl;
+				break;
+			}
+
 			MostrarDatos(lista);
 			break;
 
