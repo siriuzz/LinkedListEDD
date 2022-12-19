@@ -16,13 +16,17 @@ Fecha de entrega: 12/12/2022
 #include <cstdlib>
 using namespace std;
 
+#pragma region Nodo
 //declaracion estructura nodo
 struct Nodo {
 	int dato;
 	Nodo* siguiente;
 };
 
-#pragma region metodos y funciones
+#pragma endregion
+
+
+#pragma region Metodos y funciones
 //Declaracion de la estructura Nodo
 
 bool checkIfEmpty(Nodo*& lista) { //retorna true si la lista esta vacia
